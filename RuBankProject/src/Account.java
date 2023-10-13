@@ -1,0 +1,12 @@
+
+/**
+ * @author User
+ * Abstract class representing a general account type.
+ */
+public abstract class Account implements Comparable<Account> {
+    protected Profile holder;
+    protected double balance;
+
+    public abstract double monthlyInterest();
+    public abstract double monthlyFee();
+}
