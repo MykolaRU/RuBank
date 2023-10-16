@@ -9,16 +9,18 @@ public class AccountDatabase {
 
     public AccountDatabase(){
         this.accounts = new Account[4];         // Initial Capacity Of Accounts
-        numAcct = 0;                            // Number Of Accounts
+        this.numAcct = 0;                            // Number Of Accounts
     }
 
     // Method to find an account in the array
     private int find(Account account) {
-        for (int i = 0; i < numAcct; i++) {
-            if (accounts[i].equals(account)) {
+
+        for(int i = 0; i<numAcct; i++){
+            if(accounts[i].getHolder().equals(account.getHolder())){
                 return i;
             }
         }
+
         return -1;                              // if account not found
     }
 
@@ -89,6 +91,26 @@ public class AccountDatabase {
 
     public void printSorted() {
         // TODO: Implement the printSorted method
+
+        Account holder;
+        for (int i = 0; i < numAcct; i++) {
+            for (int j = 0; j < numAcct - i - 1; j++) {
+                if (accounts[j].getClass().toString().compareTo(accounts[j+1].getClass().toString())>0 ||
+                        ((accounts[j].getClass().toString().compareTo(accounts[j+1].getClass().toString()) == 0)
+                                && (accounts[j].holder.compareTo(accounts[j+1].holder) > 0))) {
+                    holder = accounts[j];
+                    accounts[j] = accounts[j + 1];
+                    accounts[j + 1] = holder;
+                }
+            }
+        }
+
+        System.out.println("* Event calendar by event date and start time *");
+        for (int i = 0; i < numAcct; i++) {
+            System.out.println(accounts[i]);
+        }
+        System.out.println("* end of event calendar *");
+
     }
 
     public void printFeesAndInterests() {

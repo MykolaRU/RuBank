@@ -15,9 +15,14 @@ public class Profile implements Comparable<Profile> {
     }
 
     @Override
-    public int compareTo(Profile o) {
+    public int compareTo(Profile o){
         return 0;
     }
     // TODO: Add required implementation for Profile
+
+    public boolean equals(Profile o) {
+        return this.fname.equals(o.fname) && this.lname.equals(o.lname) && this.dob.toString().equals(o.dob.toString());
+    }
+
 }
     

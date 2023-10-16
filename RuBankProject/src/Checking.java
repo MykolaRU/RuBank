@@ -41,10 +41,6 @@ public class Checking extends Account{
         this.balance = balance;
     }
 
-    //-------------- Gets Holder
-    public Profile getHolder() {
-        return this.holder;
-    }
 
     //-------------- Sets Holder
     public void setHolder(Profile holder) {

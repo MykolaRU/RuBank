@@ -12,9 +12,13 @@ public abstract class Account implements Comparable<Account> {
         this.balance=balance;
     }
 
-
     public abstract double monthlyInterest();
     public abstract double monthlyFee();
     public abstract boolean deposit(double amount);
     public abstract boolean withdraw(double amount);
+
+    public Profile getHolder() {
+        return this.holder;
+    }
+
 }
