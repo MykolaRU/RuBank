@@ -16,12 +16,21 @@ public class Profile implements Comparable<Profile> {
 
     @Override
     public int compareTo(Profile o){
+        if (this.lname.compareTo(o.lname)>0) return 1;
+        if (this.lname.compareTo(o.lname)<0) return -1;
+        if (this.fname.compareTo(o.fname)>0) return 1;
+        if (this.fname.compareTo(o.fname)<0) return -1;
+        if (this.dob.compareTo(o.dob)>0) return 1;
+        if (this.dob.compareTo(o.dob)<0) return -1;
         return 0;
     }
-    // TODO: Add required implementation for Profile
 
     public boolean equals(Profile o) {
-        return this.fname.equals(o.fname) && this.lname.equals(o.lname) && this.dob.toString().equals(o.dob.toString());
+        return this.fname.equalsIgnoreCase(o.fname) && this.lname.equalsIgnoreCase(o.lname) && this.dob.toString().equalsIgnoreCase(o.dob.toString());
+    }
+    @Override
+    public String toString(){
+        return String.format("%s %s %s",fname,lname,dob.toString());
     }
 
 }

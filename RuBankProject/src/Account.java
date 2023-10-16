@@ -21,4 +21,7 @@ public abstract class Account implements Comparable<Account> {
         return this.holder;
     }
 
+    public double getBalance() { return this.balance;}
+
+
 }

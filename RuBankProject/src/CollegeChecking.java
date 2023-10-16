@@ -35,6 +35,11 @@ public class CollegeChecking extends Checking{               // NO MONTHLY FEE F
         return this.campus;
     }
 
+    @Override
+    public String toString() {
+        return String.format("College Checking::%s::Balance $%s::%s", getHolder().toString(),getBalance(),getCampus());
+    }
+
 
     /** I probably don't need this as CC extends Checking account that has these methods **/
 //    //-------------- Method to withdraw money from the account

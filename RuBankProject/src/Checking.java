@@ -37,10 +37,10 @@ public class Checking extends Account{
     }
 
     //-------------- Sets Balance
+
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
 
     //-------------- Sets Holder
     public void setHolder(Profile holder) {
@@ -60,6 +60,11 @@ public class Checking extends Account{
     public boolean deposit(double amount){
         this.balance += amount;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Checking: :%s: :Balance $%s", getHolder().toString(),getBalance());
     }
 
 }

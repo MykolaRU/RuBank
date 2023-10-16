@@ -38,6 +38,7 @@ public class Savings  extends Account{
     }
 
     //-------------- Method to withdraw money from the account
+    @Override
     public boolean withdraw(double amount) {
         if(this.balance >= amount) {
             this.balance -= amount;
@@ -47,9 +48,20 @@ public class Savings  extends Account{
     }
 
     //-------------- Deposits money
+    @Override
     public boolean deposit(double amount){
         this.balance += amount;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        if(isLoyal) {
+            return String.format(":Savings::%s::Balance $%s::is loyal", getHolder().toString(), getBalance());
+        }
+        else{
+            return String.format("Savings::%s::Balance $%s", getHolder().toString(), getBalance());
+        }
     }
 
 

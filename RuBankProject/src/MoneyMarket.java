@@ -38,6 +38,27 @@ public class MoneyMarket extends Savings{
         return fee;                                            // Returns fee
     }
 
+
+    @Override
+    public String toString() {
+        if(isLoyal) {
+            return String.format("Money Market::Savings::%s::Balance $%s::is loyal::withdrawal: %s", getHolder().toString(), getBalance(), withdrawal);
+        }
+        else{
+            return String.format("Money Market::Savings::%s::Balance $%s::withdrawal: %s", getHolder().toString(), getBalance(), withdrawal);
+        }
+    }
+
+    @Override
+    public boolean withdraw(double amount) {
+        if(this.balance >= amount) {
+            this.balance -= amount;
+            withdrawal++;
+            return true;
+        }
+        return false;
+    }
+
     //-------------- Getter for number of withdrawals
     public int getWithdrawal() {
         return this.withdrawal;
