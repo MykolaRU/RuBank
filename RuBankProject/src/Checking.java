@@ -64,7 +64,7 @@ public class Checking extends Account{
 
     @Override
     public String toString() {
-        return String.format("Checking: :%s: :Balance $%s", getHolder().toString(),getBalance());
+        return String.format("Checking::%s: :Balance $%.2f", getHolder().toString(),getBalance());
     }
 
 }

@@ -28,40 +28,12 @@ public class AccountDatabase {
     private int find(Account account) {
 
         for(int i = 0; i<numAcct; i++){
-            if(accounts[i].getHolder().equals(account.getHolder())){
-                if(accounts[i].getClass().toString().equals("class CollegeChecking") && account.getClass().toString().equals("class Checking")) return i;
-
-                if(accounts[i].getClass().toString().equals("class Checking") && account.getClass().toString().equals("class CollegeChecking")) return i;
-
-                //if(accounts[i].getClass().toString().equals("class Savings") && account.getClass().toString().equals("class MoneyMarket")) return i;
-
-                if(accounts[i].getClass().toString().equals("class MoneyMarket") && account.getClass().toString().equals("class Savings")) return i;
-
-                if(accounts[i].getClass().equals(account.getClass())) return i;
-            }
+            if(accounts[i].getHolder().equals(account.getHolder())&& accounts[i].getClass().equals(account.getClass())) return i;
         }
 
         return -1;                              // if account not found
     }
 
-    private int findClose(Account account) {
-
-        for(int i = 0; i<numAcct; i++){
-            if(accounts[i].getHolder().equals(account.getHolder())){
-                if(accounts[i].getClass().toString().equals("class CollegeChecking") && account.getClass().toString().equals("class Checking")) return i;
-
-                //if(accounts[i].getClass().toString().equals("class Checking") && account.getClass().toString().equals("class CollegeChecking")) return i;
-
-                //if(accounts[i].getClass().toString().equals("class Savings") && account.getClass().toString().equals("class MoneyMarket")) return i;
-
-                if(accounts[i].getClass().toString().equals("class MoneyMarket") && account.getClass().toString().equals("class Savings")) return i;
-
-                if(accounts[i].getClass().equals(account.getClass())) return i;
-            }
-        }
-
-        return -1;                              // if account not found
-    }
 
     // Method to grow the array by 4 slots when it's full
     private void grow() {
@@ -109,7 +81,7 @@ public class AccountDatabase {
      * @return True if the account was successfully removed, false if it does not exist in the database.
      */
     public boolean close(Account account) {
-        int index = findClose(account);                  // Uses find to get index of the account
+        int index = find(account);                  // Uses find to get index of the account
         if (index == -1) {
             return false;                           // Returns false if account not found
         }
@@ -196,7 +168,7 @@ public class AccountDatabase {
         System.out.println();
         System.out.println("*list of accounts with fee and monthly interest");
         for (int i = 0; i < numAcct; i++) {
-            System.out.printf("%s::fee $%s::monthly interest $%s",accounts[i].toString(),accounts[i].monthlyFee(),accounts[i].monthlyInterest());
+            System.out.println(String.format("%s::fee $%.2f::monthly interest $",accounts[i].toString(),accounts[i].monthlyFee(),accounts[i].monthlyInterest()));
         }
         System.out.println("*end of list.");
         System.out.println();
