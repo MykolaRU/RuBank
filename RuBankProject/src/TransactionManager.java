@@ -119,10 +119,14 @@ public class TransactionManager {
         switch (accountType) {
             case "C":               // Checking
                 Checking newChecking = new Checking(new Profile(fName,lName,new Date(date)),deposit);
+                CollegeChecking testChecking = new CollegeChecking(new Profile(fName,lName,new Date(date)),deposit, Campus.CAMDEN);
+                if(accountDatabase.contains(testChecking)){System.out.println(String.format("%s %s %s(%s) is already in the database",fName,lName,date,accountType)); return;}
                 if(accountDatabase.open(newChecking)) System.out.println(newChecking.getHolder().toString()+"(C) opened");
                 break;
             case "CC":              // College checking
                 CollegeChecking newCollegeChecking = new CollegeChecking(new Profile(fName,lName,new Date(date)),deposit,Campus.getCampus(campusCode));
+                Checking test2Checking = new Checking(new Profile(fName,lName,new Date(date)),deposit);
+                if(accountDatabase.contains(test2Checking)){System.out.println(String.format("%s %s %s(%s) is already in the database",fName,lName,date,accountType)); return;}
                 if(accountDatabase.open(newCollegeChecking)) System.out.println(newCollegeChecking.getHolder().toString()+"(CC) opened");
                 break;
             case "S":               // Savings
@@ -190,8 +194,10 @@ public class TransactionManager {
 
     public void closeCommand(String accountType, String fName, String lName,
                              String date,String depositString, int campusCode, int customerStatus){
-
         if(!checkValid(accountType,fName,lName,date,depositString,campusCode,customerStatus)) return;
+        if(!contains(accountType,fName,lName,date,depositString,campusCode,customerStatus)) {
+            System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;
+        }
 
         double deposit = Double.parseDouble(depositString);
 
@@ -199,22 +205,22 @@ public class TransactionManager {
             case "C":               // Checking
                 Checking newChecking = new Checking(new Profile(fName,lName,new Date(date)),deposit);
                 if(accountDatabase.close(newChecking)) System.out.println(newChecking.getHolder().toString()+"(C) has been closed.");
-                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType));}
+                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;}
                 break;
             case "CC":              // College checking
                 CollegeChecking newCollegeChecking = new CollegeChecking(new Profile(fName,lName,new Date(date)),deposit,Campus.getCampus(campusCode));
                 if(accountDatabase.close(newCollegeChecking)) System.out.println(newCollegeChecking.getHolder().toString()+"(CC) has been closed.");
-                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType));}
+                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;}
                 break;
             case "S":               // Savings
                 Savings newSavings = new Savings(new Profile(fName,lName,new Date(date)),deposit, customerStatus == 1);
-                if(accountDatabase.open(newSavings)) System.out.println(newSavings.getHolder().toString()+"(S) has been closed.");
-                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType));}
+                if(accountDatabase.close(newSavings)) System.out.println(newSavings.getHolder().toString()+"(S) has been closed.");
+                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;}
                 break;
             case "MM":               // Money market savings
                 MoneyMarket newMoneyMarket = new MoneyMarket(new Profile(fName,lName,new Date(date)),deposit, true);
-                if(accountDatabase.open(newMoneyMarket)) System.out.println(newMoneyMarket.getHolder().toString()+"(MM) has been closed.");
-                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType));}
+                if(accountDatabase.close(newMoneyMarket)) System.out.println(newMoneyMarket.getHolder().toString()+"(MM) has been closed.");
+                else{System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;}
                 break;
             default:
                 break;
@@ -224,15 +230,15 @@ public class TransactionManager {
     public void depositCommand(String accountType, String fName, String lName,
                             String date,String depositString, int campusCode, int customerStatus) {
 
+        if(!contains(accountType,fName,lName,date,depositString,campusCode,customerStatus)) {
+            System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;
+        }
+
         if(!checkValid(accountType,fName,lName,date,depositString,campusCode,customerStatus)) return;
 
         double deposit = Double.parseDouble(depositString);
 
         if(deposit<=0){System.out.println("Deposit - amount cannot be 0 or negative."); return;}
-
-        if(!contains(accountType,fName,lName,date,depositString,campusCode,customerStatus)) {
-            System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;
-        }
 
         switch (accountType) {
             case "C":               // Checking
@@ -259,30 +265,34 @@ public class TransactionManager {
 
     public void withdrawCommand(String accountType, String fName, String lName,
                                 String date,String depositString, int campusCode, int customerStatus){
-        if(!checkValid(accountType,fName,lName,date,depositString,campusCode,customerStatus)) return;
-
-        double deposit = Double.parseDouble(depositString);
-
         if(!contains(accountType,fName,lName,date,depositString,campusCode,customerStatus)) {
             System.out.println(String.format("%s %s %s(%s) is not in the database",fName,lName,date,accountType)); return;
         }
+
+        if(!checkValid(accountType,fName,lName,date,depositString,campusCode,customerStatus)) return;
+
+        double deposit = Double.parseDouble(depositString);
 
         switch (accountType) {
             case "C":               // Checking
                 Checking newChecking = new Checking(new Profile(fName,lName,new Date(date)),deposit);
                 if(accountDatabase.withdraw(newChecking,deposit)) System.out.println(newChecking.getHolder().toString()+"(C) Withdraw - balance updated.");
+                else{System.out.println(newChecking.getHolder().toString()+"(C) Withdraw - insufficient fund."); return;}
                 break;
             case "CC":              // College checking
                 CollegeChecking newCollegeChecking = new CollegeChecking(new Profile(fName,lName,new Date(date)),deposit,Campus.getCampus(campusCode));
                 if(accountDatabase.withdraw(newCollegeChecking,deposit)) System.out.println(newCollegeChecking.getHolder().toString()+"(CC) Withdraw - balance updated.");
+                else{System.out.println(newCollegeChecking.getHolder().toString()+"(C) Withdraw - insufficient fund."); return;}
                 break;
             case "S":               // Savings
                 Savings newSavings = new Savings(new Profile(fName,lName,new Date(date)),deposit, customerStatus == 1);
                 if(accountDatabase.withdraw(newSavings,deposit)) System.out.println(newSavings.getHolder().toString()+"(S) Withdraw - balance updated.");
+                else{System.out.println(newSavings.getHolder().toString()+"(C) Withdraw - insufficient fund."); return;}
                 break;
             case "MM":               // Money market savings
                 MoneyMarket newMoneyMarket = new MoneyMarket(new Profile(fName,lName,new Date(date)),deposit, true);
                 if(accountDatabase.withdraw(newMoneyMarket,deposit)) System.out.println(newMoneyMarket.getHolder().toString()+"(MM) Withdraw - balance updated.");
+                else{System.out.println(newMoneyMarket.getHolder().toString()+"(C) Withdraw - insufficient fund."); return;}
                 break;
             default:
                 break;

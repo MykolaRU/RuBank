@@ -37,7 +37,7 @@ public class CollegeChecking extends Checking{               // NO MONTHLY FEE F
 
     @Override
     public String toString() {
-        return String.format("College Checking::%s::Balance $%s::%s", getHolder().toString(),getBalance(),getCampus());
+        return String.format("College Checking::%s::Balance $%.2f::%s", getHolder().toString(),getBalance(),getCampus());
     }
 
 

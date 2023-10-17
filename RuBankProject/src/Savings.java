@@ -57,10 +57,10 @@ public class Savings  extends Account{
     @Override
     public String toString() {
         if(isLoyal) {
-            return String.format(":Savings::%s::Balance $%s::is loyal", getHolder().toString(), getBalance());
+            return String.format(":Savings::%s::Balance $%.2f::is loyal", getHolder().toString(), getBalance());
         }
         else{
-            return String.format("Savings::%s::Balance $%s", getHolder().toString(), getBalance());
+            return String.format("Savings::%s::Balance $%.2f", getHolder().toString(), getBalance());
         }
     }
 

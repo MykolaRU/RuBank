@@ -42,10 +42,10 @@ public class MoneyMarket extends Savings{
     @Override
     public String toString() {
         if(isLoyal) {
-            return String.format("Money Market::Savings::%s::Balance $%s::is loyal::withdrawal: %s", getHolder().toString(), getBalance(), withdrawal);
+            return String.format("Money Market::Savings::%s::Balance $%.2f::is loyal::withdrawal: %s", getHolder().toString(), getBalance(), withdrawal);
         }
         else{
-            return String.format("Money Market::Savings::%s::Balance $%s::withdrawal: %s", getHolder().toString(), getBalance(), withdrawal);
+            return String.format("Money Market::Savings::%s::Balance $%.2f::withdrawal: %s", getHolder().toString(), getBalance(), withdrawal);
         }
     }
 
