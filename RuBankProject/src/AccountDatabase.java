@@ -1,17 +1,25 @@
 
 /**
- * @author User
+ * @authors Mykola and Ethan
  * A database to manage different account types.
  */
 public class AccountDatabase {
     private Account[] accounts;
     private int numAcct;
 
+    /**
+     * Constructor for the AccountDatabase class.
+     * Initializes the array of accounts and sets the initial number of accounts to zero.
+     */
     public AccountDatabase(){
         this.accounts = new Account[4];         // Initial Capacity Of Accounts
         this.numAcct = 0;                            // Number Of Accounts
     }
 
+    /**
+     * Gets the current number of accounts in the database.
+     * @return The number of accounts.
+     */
     public int getNumAcct(){
         return this.numAcct;
     }
@@ -66,12 +74,21 @@ public class AccountDatabase {
         }
     }
 
-    // Check if an account exists in the database
+    /**
+     * Checks if the database contains a given account.
+     * @param account The account to check for.
+     * @return True if the account exists in the database, false otherwise.
+     */
     public boolean contains(Account account) {
         return find(account) != -1;
     }
 
-    // Method to add a new account to the database
+
+    /**
+     * Adds a new account to the database.
+     * @param account The account to be added.
+     * @return True if the account was successfully added, false if it already exists or there was an error.
+     */
     public boolean open(Account account) {
         if (contains(account)) {
             return false;                           // Returns false if account already exists
@@ -86,7 +103,11 @@ public class AccountDatabase {
         return true;                                // Returns true when account is created
     }
 
-    // Removes account from the database
+    /**
+     * Removes an account from the database.
+     * @param account The account to be removed.
+     * @return True if the account was successfully removed, false if it does not exist in the database.
+     */
     public boolean close(Account account) {
         int index = findClose(account);                  // Uses find to get index of the account
         if (index == -1) {
@@ -102,7 +123,12 @@ public class AccountDatabase {
         return true;
     }
 
-    // Method to withdraw money from an account
+    /**
+     * Withdraws a specified amount of money from an account.
+     * @param account The account to withdraw from.
+     * @param amount The amount to withdraw.
+     * @return True if the withdrawal was successful, false if the account does not exist or there are insufficient funds.
+     */
     public boolean withdraw(Account account, double amount) {
         int index = find(account);
 
@@ -114,7 +140,12 @@ public class AccountDatabase {
         return accounts[index].withdraw(amount);    // Calls the with draw method of the specific account type
     }
 
-    // Method to deposit money into an account
+    /**
+     * Deposits a specified amount of money into an account.
+     * @param account The account to deposit into.
+     * @param amount The amount to deposit.
+     * @return True if the deposit was successful, false if the account does not exist or there was an error.
+     */
     public boolean deposit(Account account, double amount) {
         int index = find(account);
         if (index == -1) {
@@ -123,9 +154,8 @@ public class AccountDatabase {
         return accounts[index].deposit(amount);     // Calls the deposit method of the specific account type
     }
 
+     // This method prints the accounts sorted by account type and holder's name.
     public void printSorted() {
-        // TODO: Implement the printSorted method
-
         Account holder;
         for (int i = 0; i < numAcct; i++) {
             for (int j = 0; j < numAcct - i - 1; j++) {
@@ -148,8 +178,8 @@ public class AccountDatabase {
 
     }
 
+     // This method prints a list of accounts with associated fees and monthly interest.
     public void printFeesAndInterests() {
-        // TODO: Implement the printFeesAndInterests method
         Account holder;
         for (int i = 0; i < numAcct; i++) {
             for (int j = 0; j < numAcct - i - 1; j++) {
@@ -172,8 +202,8 @@ public class AccountDatabase {
         System.out.println();
     }
 
+     // This method updates account balances by applying fees and interests and then prints the updated balances.
     public void printUpdatedBalances() {
-        // TODO: Implement the printUpdatedBalances method
 
         for(int i = 0; i<numAcct; i++){
             accounts[i].deposit(accounts[i].monthlyInterest() - accounts[i].monthlyFee());

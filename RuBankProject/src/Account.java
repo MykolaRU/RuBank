@@ -1,6 +1,6 @@
 
 /**
- * @author User
+ * @authors Mykola and Ethan
  * Abstract class representing a general account type.
  */
 public abstract class Account implements Comparable<Account> {

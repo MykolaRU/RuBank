@@ -1,6 +1,6 @@
 
 /**
- * @author User
+ * @authors Mykola, Ethan
  * Class representing a MoneyMarket.
  */
 public class MoneyMarket extends Savings{
@@ -12,6 +12,12 @@ public class MoneyMarket extends Savings{
     private static final double WITHDRAWAL_FEE = 10;                // Fee if withdrawal >3
 
 
+    /**
+     * Constructor for creating a MoneyMarket account.
+     * @param holder The profile of the account holder.
+     * @param balance The initial balance of the account.
+     * @param isLoyal A boolean indicating whether the account holder is loyal.
+     */
     public MoneyMarket(Profile holder, double balance, boolean isLoyal) {
         super(holder, balance, true);                       // Automatically sets the account to isLoyal
         this.withdrawal = 0;
@@ -74,20 +80,6 @@ public class MoneyMarket extends Savings{
         this.withdrawal++;
     }
 
-    /** I probably don't need this as MM extends Savings account that has these methods **/
-    //    //-------------- Method to deposit money to the account
-//    public void depositMoney(double amount) {
-//        super.depositMoney(amount);                         // Use the depositMoney method from the Savings class
-//    }
-//
-//    //-------------- Method for withdrawing money from balance
-//    public boolean withdrawMoney(double amount){
-//        if(super.withdrawMoney(amount)){                    // Calls super and checks if enough money on Balance
-//            incrementWithdrawal();                          // Increments number of withdrawals by one
-//            return true;
-//        }
-//        return false;
-//    }
 
 
 

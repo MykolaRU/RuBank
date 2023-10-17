@@ -1,6 +1,6 @@
 
 /**
- * @author User
+ * @authors Mykola and Ethan
  * Class representing a Checking.
  */
 public class Checking extends Account{

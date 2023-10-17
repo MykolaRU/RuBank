@@ -5,7 +5,7 @@ import java.util.Calendar;
  and provides functionalities to validate the date, determine leap years,
  and compare two Date objects.
 
- @author Ethan, Mykola
+ @authors Ethan, Mykola
  */
 public class Date implements Comparable<Date> {
     private int year;

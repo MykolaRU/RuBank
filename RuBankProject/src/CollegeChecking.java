@@ -1,6 +1,6 @@
 
 /**
- * @author User
+ * @authors Mykola, Ethan
  * Class representing a CollegeChecking.
  */
 public class CollegeChecking extends Checking{               // NO MONTHLY FEE FOR THIS ACCOUNT
@@ -40,18 +40,4 @@ public class CollegeChecking extends Checking{               // NO MONTHLY FEE F
         return String.format("College Checking::%s::Balance $%s::%s", getHolder().toString(),getBalance(),getCampus());
     }
 
-
-    /** I probably don't need this as CC extends Checking account that has these methods **/
-//    //-------------- Method to withdraw money from the account
-//    public boolean withdrawMoney(double amount) {
-//        if(super.withdrawMoney(amount)) {
-//            return true;                                // Returns true if withdrawal was successfully
-//        }
-//        return false;
-//    }
-//
-//    //-------------- Deposit money method
-//    public void depositMoney(double amount){
-//        this.balance += amount;
-//    }
 }

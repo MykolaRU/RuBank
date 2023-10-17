@@ -1,3 +1,7 @@
+/**
+ * @authors Mykola and Ethan
+ * Enum representing different campus locations.
+ */
 public enum Campus {
     NEW_BRUNSWICK(0), NEWARK(1), CAMDEN(2);
 

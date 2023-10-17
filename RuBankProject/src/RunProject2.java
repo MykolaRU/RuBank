@@ -1,6 +1,6 @@
 
 /**
- * @author User
+ * @authors Mykola, Ethan
  * Class representing a RunProject2.
  */
 public class RunProject2 {

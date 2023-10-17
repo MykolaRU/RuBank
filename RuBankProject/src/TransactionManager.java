@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Calendar;
 /**
- * @author User
+ * @authors Mykola, Ethan
  * Class representing a TransactionManager.
  */
 public class TransactionManager {
@@ -47,13 +47,21 @@ public class TransactionManager {
         }
     }
 
+
+    /**
+     * Checks the length of command arguments.
+     *
+     * @param command The command being checked.
+     * @param tokens  An array of command tokens.
+     * @return True if the command has the correct number of arguments, false otherwise.
+     */
     private boolean checkLength(String command,String[] tokens){
         if(command.equals("C") && tokens.length < 5) {
             System.out.println("Missing data for closing an account.");
             return false;
         }
         if(command.equals("O") && tokens.length < 6) {
-            System.out.println("Missing data for closing an account.");
+            System.out.println("Missing data for opening an account.");
             return false;
         }
         if(command.equals("D") && tokens.length < 6) {
@@ -67,6 +75,18 @@ public class TransactionManager {
         return true;
     }
 
+    /**
+     * Performs actions based on user commands.
+     *
+     * @param command        The user command.
+     * @param accountType    The type of account.
+     * @param fName          The first name of the account holder.
+     * @param lName          The last name of the account holder.
+     * @param date           The date of birth of the account holder.
+     * @param deposit        The deposit amount.
+     * @param campusCode     The campus code (for college checking accounts).
+     * @param customerStatus The customer status (1 for loyal, 0 for non-loyal).
+     */
     private void action(String command, String accountType, String fName, String lName, String date, String deposit, int campusCode, int customerStatus){
         switch (command) {
             case "O":
@@ -104,7 +124,17 @@ public class TransactionManager {
         }
     }
 
-    /** this method will handle all the COMMANDs stemming from O -> OPEN **/
+        /**
+         * Handles the opening of an account.
+         *
+         * @param accountType    The type of account to be opened.
+         * @param fName          The first name of the account holder.
+         * * @param lName The last name of the account holder.
+         * * @param date The date of birth of the account holder.
+         * * @param depositString The deposit amount as a string.
+         * * @param campusCode The campus code (for college checking accounts).
+         * * @param customerStatus The customer status (1 for loyal, 0 for non-loyal).
+         * */
     public void openCommand(String accountType, String fName, String lName,
                             String date,String depositString, int campusCode, int customerStatus){
 
@@ -142,6 +172,19 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Checks if the provided data for an account is valid.
+     *
+     * @param accountType    The type of account.
+     * @param fName          The first name of the account holder.
+     * @param lName          The last name of the account holder.
+     * @param date           The date of birth of the account holder.
+     * @param depositString  The deposit amount as a string.
+     * @param campusCode     The campus code (for college checking accounts).
+     * @param customerStatus The customer status (1 for loyal, 0 for non-loyal).
+     * @return True if the data is valid, false otherwise.
+     */
+
     private boolean checkValid(String accountType, String fName, String lName,
                                String date,String depositString, int campusCode, int customerStatus){
 
@@ -171,6 +214,19 @@ public class TransactionManager {
         }
         return true;
     }
+
+    /**
+     * Checks if an account with the provided data already exists in the database.
+     *
+     * @param accountType    The type of account.
+     * @param fName          The first name of the account holder.
+     * @param lName          The last name of the account holder.
+     * @param date           The date of birth of the account holder.
+     * @param depositString  The deposit amount as a string.
+     * @param campusCode     The campus code (for college checking accounts).
+     * @param customerStatus The customer status (1 for loyal, 0 for non-loyal).
+     * @return True if the account exists, false otherwise.
+     */
     private boolean contains(String accountType, String fName, String lName,
                              String date,String depositString, int campusCode, int customerStatus){
 
@@ -188,6 +244,17 @@ public class TransactionManager {
         return accountDatabase.contains(newPerson);
     }
 
+    /**
+     * Handles the closing of an account based on the provided data.
+     *
+     * @param accountType    The type of account.
+     * @param fName          The first name of the account holder.
+     * @param lName          The last name of the account holder.
+     * @param date           The date of birth of the account holder.
+     * @param depositString  The deposit amount as a string.
+     * @param campusCode     The campus code (for college checking accounts).
+     * @param customerStatus The customer status (1 for loyal, 0 for non-loyal).
+     */
     public void closeCommand(String accountType, String fName, String lName,
                              String date,String depositString, int campusCode, int customerStatus){
 
@@ -221,6 +288,18 @@ public class TransactionManager {
         }
     }
 
+
+    /**
+     * Handles the deposit of an amount to an account based on the provided data.
+     *
+     * @param accountType    The type of account.
+     * @param fName          The first name of the account holder.
+     * @param lName          The last name of the account holder.
+     * @param date           The date of birth of the account holder.
+     * @param depositString  The deposit amount as a string.
+     * @param campusCode     The campus code (for college checking accounts).
+     * @param customerStatus The customer status (1 for loyal, 0 for non-loyal).
+     */
     public void depositCommand(String accountType, String fName, String lName,
                             String date,String depositString, int campusCode, int customerStatus) {
 
@@ -256,6 +335,18 @@ public class TransactionManager {
                 break;
         }
     }
+
+    /**
+     * Handles the withdrawal of an amount from an account based on the provided data.
+     *
+     * @param accountType    The type of account.
+     * @param fName          The first name of the account holder.
+     * @param lName          The last name of the account holder.
+     * @param date           The date of birth of the account holder.
+     * @param depositString  The deposit amount as a string.
+     * @param campusCode     The campus code (for college checking accounts).
+     * @param customerStatus The customer status (1 for loyal, 0 for non-loyal).
+     */
 
     public void withdrawCommand(String accountType, String fName, String lName,
                                 String date,String depositString, int campusCode, int customerStatus){

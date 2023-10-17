@@ -1,6 +1,6 @@
 
 /**
- * @author User
+ * @authors Mykola, Ethan
  * Class representing a Savings.
  */
 public class Savings  extends Account{
@@ -10,6 +10,12 @@ public class Savings  extends Account{
     private static final double FEE_WAIVER_BALANCE = 500;
     private static final double MONTHLY_FEE = 25;
 
+    /**
+     * Constructor for creating a Savings account.
+     * @param holder The profile of the account holder.
+     * @param balance The initial balance of the account.
+     * @param isLoyal A boolean indicating whether the account holder is loyal.
+     */
     public Savings(Profile holder, double balance, boolean isLoyal){
         super(holder,balance);
         this.isLoyal = isLoyal;
@@ -27,12 +33,18 @@ public class Savings  extends Account{
         return (this.balance>=FEE_WAIVER_BALANCE) ? 0 : MONTHLY_FEE;         // If more than $500 no fee
     }
 
-    //-------------- Sets isLoyal status
+    /**
+     * Sets the loyal status of the account.
+     * @param isLoyal The new loyal status to set.
+     */
     public void setIsLoyal(boolean isLoyal){
         this.isLoyal = isLoyal;
     }
 
-    //-------------- Gets isloyal status
+    /**
+     * Gets the loyal status of the account.
+     * @return True if the account is loyal, false otherwise.
+     */
     public boolean getIsLoyal(){
         return this.isLoyal;
     }
