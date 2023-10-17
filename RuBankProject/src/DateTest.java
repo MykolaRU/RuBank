@@ -24,7 +24,7 @@ class DateTest {
 
     @Test
     void testYearTooLow(){
-        Date date = new Date("01/32/1");
+        Date date = new Date("03/32/1");
         assertFalse(date.isValid());
     }
 
